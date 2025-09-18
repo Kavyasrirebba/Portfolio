@@ -1,122 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kavya Sri Rebba | Web Developer Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tech-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .skill-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        
+        .skill-bar.animate {
+            width: var(--width);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid #4f46e5;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #4f46e5; }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
-<body>
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="container">
-      <h1 class="logo">Kavya Sri Rebba</h1>
-      <span class="menu-toggle">☰</span>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold tech-gradient bg-clip-text text-transparent">
+                    Portfolio
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-blue-400">Home</a>
+                    <a href="#about" class="nav-link hover:text-blue-400">About</a>
+                    <a href="#skills" class="nav-link hover:text-blue-400">Skills</a>
+                    <a href="#experience" class="nav-link hover:text-blue-400">Experience</a>
 
-  <!-- HERO -->
-  <section id="home" class="hero">
-    <div class="container">
-      <h2>Hi, I'm Kavya</h2>
-      <h2>Welcome to my Portfolio!</h2>
-      <h3>Web Developer</h3>
-      <p>I create engaging, responsive websites that help businesses stand out online.</p>
-      <a href="#projects" class="btn">View My Work</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        I help individuals, startups, and organizations bring their online vision to life. As a Web Developer, I design and code websites that are not only responsive and modern but also tailored to each client’s needs. From travel blogs to corporate sites, I’ve built projects like <a href="https://travelandcapture.com/" target="_blank">Travel & Capture</a>, 
-        <a href="https://stratheartedge.com/" target="_blank">Strat Heart Edge</a>, 
-        <a href="https://schoolofparenting.in/" target="_blank">School of Parenting</a>, <a href="https://cfoe.in/" target="_blank">CFOE</a> and more, each reflecting a unique story and brand identity.
-      </p>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="skills">
-    <div class="container">
-      <h2>Skills</h2>
-      <ul>
-        <li>HTML5</li>
-        <li>CSS3</li>
-        <li>JavaScript</li>
-        <li>React.js</li>
-        <li>Responsive Design</li>
-        <li>Hosting & Deployment (Hostinger)</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <h2>Here are some of My Projects</h2>
-      <div class="project-grid">
-        <div class="project">
-          <h3><a href="https://travelandcapture.com/" target="_blank">Travel & Capture</a></h3>
-          <p>Developed a responsive travel blog featuring optimized image galleries, seamless navigation, and a mobile-first user experience.</p><br/>
-          <a href="https://travelandcapture.com/" target="_blank"><button class="visit-buttons">Visit</button></a>
+                    <a href="#contact" class="nav-link hover:text-blue-400">Contact</a>
+                </div>
+            </div>
         </div>
-        <div class="project">
-          <h3><a href="https://travelandcapture.com/" target="_blank">Prashanti Unlimited</a></h3>
-          <p>Developed a clean, engaging website for a coaching platform, focusing on smooth navigation, impactful visuals, and clear call-to-action elements to enhance user engagement.</p><br/>
-          <a href="https://prashantiunlimited.com/" target="_blank"><button class="visit-buttons">Visit</button></a>
-        </div>
-        <div class="project">
-          <h3><a href="https://stratheartedge.com/" target="_blank">Strat Heart Edge</a></h3>
-          <p>Created a corporate website with a clean design system, structured content hierarchy, and smooth navigation for professional branding.</p><br/>
-          <a href="https://stratheartedge.com/" target="_blank"><button class="visit-buttons">Visit</button></a>
-        </div>
-        <div class="project">
-          <h3><a href="https://schoolofparenting.in/" target="_blank">School of Parenting</a></h3>
-          <p>Designed and coded a wellness and education platform with engaging layouts, interactive sections, and responsive content delivery.</p><br/>
-          <a href="https://schoolofparenting.in/" target="_blank"><button class="visit-buttons">Visit</button></a>
-        </div>
-        <div class="project">
-          <h3><a href="https://cfoe.in/" target="_blank">CFOE</a></h3>
-          <p>Developed a professional organizational website with an accessible, mobile-friendly interface and custom deployment on Hostinger.</p><br/>
-          <a href="https://cfoe.in/" target="_blank"><button class="visit-buttons">Visit</button></a>
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Let's Connect</h2>
-      <p>Email: <a href="mailto:kavyasrirebba02@gmail.com">kavyasreerebba22@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/kavya-sri-rebba/">linkedin.com/in/kavyasri</a></p>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="floating absolute top-20 left-20 text-6xl">💻</div>
+            <div class="floating absolute top-40 right-32 text-4xl" style="animation-delay: -2s;">⚡</div>
+            <div class="floating absolute bottom-32 left-32 text-5xl" style="animation-delay: -4s;">🚀</div>
+            <div class="floating absolute bottom-20 right-20 text-3xl" style="animation-delay: -1s;">✨</div>
+        </div>
+        
+        <div class="text-center z-10 max-w-4xl mx-auto px-6">
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto mb-6 tech-gradient rounded-full flex items-center justify-center text-6xl">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-5xl font-bold mb-6 fade-in">
+                Kavya Sri Rebba
+            </h1>
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 fade-in text-blue-300">
+                Frontend Developer
+            </h2>
+            <div class="text-xl md:text-2xl mb-8 typing" style="width: fit-content; margin: 0 auto;">
+                Crafting Digital Experiences
+            </div>
+            <p class="text-lg md:text-xl mb-12 fade-in opacity-90 max-w-2xl mx-auto">
+                Passionate about creating beautiful, functional, and user-friendly web applications using modern technologies
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                <button onclick="scrollToSection('experience')" class="px-8 py-4 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                    View My Work
+                </button>
+                <button onclick="scrollToSection('contact')" class="px-8 py-4 border-2 border-white rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
+                    Get In Touch
+                </button>
+            </div>
+        </div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 Kavya Sri Rebba | Built with ❤️</p>
-    </div>
-  </footer>
+    <!-- Professional Summary -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in">
+                <span class="tech-gradient bg-clip-text text-transparent">Professional Summary</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in-left">
+                    <div class="text-8xl mb-6 tech-gradient bg-clip-text text-transparent">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Frontend Web Developer</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        I help individuals, startups, and organizations bring their online vision to life. As a Web Developer, I design and code websites that are not only responsive and modern but also tailored to each client’s needs. From travel blogs to corporate sites, I’ve built projects like Travel & Capture, Prashanti Unlimited, Strat Heart Edge, School of Parenting, CFOE and more, each reflecting a unique story and brand identity.
+                    </p>
+                </div>
+                <div class="slide-in-right">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-gray-700 rounded-xl hover-lift">
+                            <div class="text-3xl mb-2 text-blue-400">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="text-2xl font-bold">10+</div>
+                            <div class="text-gray-400">Projects</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-700 rounded-xl hover-lift">
+                            <div class="text-3xl mb-2 text-green-400">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="text-2xl font-bold">6+</div>
+                            <div class="text-gray-400">Certifications</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-700 rounded-xl hover-lift">
+                            <div class="text-3xl mb-2 text-purple-400">
+                                <i class="fas fa-code-branch"></i>
+                            </div>
+                            <div class="text-2xl font-bold">React</div>
+                            <div class="text-gray-400">Specialist</div>
+                        </div>
+                        <div class="text-center p-6 bg-gray-700 rounded-xl hover-lift">
+                            <div class="text-3xl mb-2 text-yellow-400">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="text-2xl font-bold">3</div>
+                            <div class="text-gray-400">Languages</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
-</body>
+    <!-- Technical Skills -->
+    <section id="skills" class="py-20 bg-gray-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in">
+                <span class="tech-gradient bg-clip-text text-transparent">Technical Skills</span>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" style="display: flex; justify-content: center;">
+                <div class="skill-category fade-in">
+                    <h3 class="text-xl font-semibold mb-6 text-blue-400">Frontend</h3>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fab fa-react text-blue-400 text-xl mr-3"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fab fa-js-square text-yellow-400 text-xl mr-3"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fab fa-html5 text-orange-400 text-xl mr-3"></i>
+                            <span>HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in">
+                    <h3 class="text-xl font-semibold mb-6 text-green-400">Backend</h3>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fab fa-node-js text-green-400 text-xl mr-3"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fab fa-python text-blue-400 text-xl mr-3"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-800 rounded-lg">
+                            <i class="fas fa-database text-purple-400 text-xl mr-3"></i>
+                            <span>SQL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section id="experience" class="py-20 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in">
+                <span class="tech-gradient bg-clip-text text-transparent">Professional Experience</span>
+            </h2>
+            <div class="space-y-12">
+                <div class="experience-item slide-in-left">
+                    <div class="bg-gray-700 rounded-xl p-8 hover-lift">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                            <div>
+                                <h3 class="text-2xl font-semibold text-blue-400 mb-2">Freelance Web Developer</h3>
+                                <p class="text-gray-300">Self-Employed</p>
+                            </div>
+                            <div class="text-gray-400 mt-2 md:mt-0">
+                                <i class="fas fa-calendar-alt mr-2"></i>
+                                July 2024 - Present
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-6">
+                            Developed and maintained multiple client websites using modern web technologies. 
+                            Focused on responsive design, performance optimization, and user experience.
+                        </p>
+                        <div class="mb-6">
+                            <h4 class="text-2xl font-bold mb-6 text-center">
+                                <span class="tech-gradient bg-clip-text text-transparent">🚀 Real-Time Projects</span>
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <a href="https://travelandcapture.com" target="_blank" class="project-card rounded-xl p-6 hover-lift bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-camera text-3xl text-blue-400 mr-4"></i>
+                                        <div>
+                                            <h5 class="text-lg font-semibold text-blue-300">Travel & Capture</h5>
+                                            <p class="text-sm text-gray-400">Photography Portfolio</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm">Developed a responsive travel blog featuring optimized image galleries, seamless navigation, and a mobile-first user experience.</p><br/>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                                        <button class="px-8 py-1.5 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                                            Visit
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="https://schoolofparenting.in" target="_blank" class="project-card rounded-xl p-6 hover-lift bg-gradient-to-br from-green-600/20 to-teal-600/20 border border-green-500/30">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-graduation-cap text-3xl text-green-400 mr-4"></i>
+                                        <div>
+                                            <h5 class="text-lg font-semibold text-green-300">School of Parenting</h5>
+                                            <p class="text-sm text-gray-400">Educational Platform</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm">Designed and coded a wellness and education platform with engaging layouts, interactive sections, and responsive content delivery.</p><br/>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                                        <button class="px-8 py-1.5 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                                            Visit
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="https://prashantiunlimited.com" target="_blank" class="project-card rounded-xl p-6 hover-lift bg-gradient-to-br from-purple-600/20 to-pink-600/20 border border-purple-500/30">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-infinity text-3xl text-purple-400 mr-4"></i>
+                                        <div>
+                                            <h5 class="text-lg font-semibold text-purple-300">Prashanti Unlimited</h5>
+                                            <p class="text-sm text-gray-400">Business Website</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm">Developed a Modern business website with service showcase and client management.</p><br/>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                                        <button class="px-8 py-1.5 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                                            Visit
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="https://stratheartedge.com" target="_blank" class="project-card rounded-xl p-6 hover-lift bg-gradient-to-br from-red-600/20 to-orange-600/20 border border-red-500/30">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-heart text-3xl text-red-400 mr-4"></i>
+                                        <div>
+                                            <h5 class="text-lg font-semibold text-red-300">Stratheart Edge</h5>
+                                            <p class="text-sm text-gray-400">Healthcare Platform</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm">Created a corporate website with a clean design system, structured content hierarchy, and smooth navigation for professional branding.</p><br/>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                                        <button class="px-8 py-1.5 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                                            Visit
+                                        </button>
+                                    </div>
+                                </a>
+                                <a href="https://cfoe.in" target="_blank" class="project-card rounded-xl p-6 hover-lift bg-gradient-to-br from-yellow-600/20 to-orange-600/20 border border-yellow-500/30 md:col-span-2">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-building text-3xl text-yellow-400 mr-4"></i>
+                                        <div>
+                                            <h5 class="text-lg font-semibold text-yellow-300">CFOE</h5>
+                                            <p class="text-sm text-gray-400">Corporate Website</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-300 text-sm">Developed a Professional corporate website with comprehensive business solutions and client portal.</p><br/>
+                                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                                        <button class="px-8 py-1.5 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover-lift">
+                                            Visit
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Certifications -->
+    <section class="py-20 bg-gray-800">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in">
+                <span class="tech-gradient bg-clip-text text-transparent">Certifications</span>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-blue-400">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Full Stack Development</h3>
+                    <p class="text-gray-400 text-sm">Complete web development certification</p>
+                </div>
+                
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-cyan-400">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">React JS</h3>
+                    <p class="text-gray-400 text-sm">Advanced React development</p>
+                </div>
+                
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-green-400">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Node JS</h3>
+                    <p class="text-gray-400 text-sm">Backend development with Node.js</p>
+                </div>
+                
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-yellow-400">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">JavaScript Essentials</h3>
+                    <p class="text-gray-400 text-sm">Core JavaScript programming</p>
+                </div>
+                
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-purple-400">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">SQL</h3>
+                    <p class="text-gray-400 text-sm">Database management and queries</p>
+                </div>
+                
+                <div class="certification-card bg-gray-700 rounded-xl p-6 hover-lift fade-in">
+                    <div class="text-3xl mb-4 text-red-400">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Additional Certifications</h3>
+                    <p class="text-gray-400 text-sm">Various technology certifications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8 fade-in">
+                <span class="tech-gradient bg-clip-text text-transparent">Let's Work Together</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 fade-in">
+                Ready to bring your ideas to life? Let's create something amazing together.
+            </p>
+            <div class="flex flex-col sm:flex-col gap-6 justify-center fade-in text-1.5xl">
+                <p>Email: <a href="mailto:kavyasreerebba22@gmail.com" style="color: #06b6d4;">kavyasreerebba22@gmail.com</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/kavya-sri-rebba/" target="_blank" style="color: #06b6d4;"">linkedin.com/in/kavyasri</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-800 border-t border-gray-700">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gray-400">
+                © 2024 Kavya sri Rebba. Crafted with ❤️ and modern web technologies.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    if (entry.target.classList.contains('skill-category')) {
+                        const skillBars = entry.target.querySelectorAll('.skill-bar');
+                        skillBars.forEach(bar => {
+                            setTimeout(() => {
+                                bar.classList.add('animate');
+                            }, 500);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .skill-category');
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Navigation active state
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('text-blue-400');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('text-blue-400');
+                    }
+                });
+            });
+        });
+
+        // Add click handlers for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980fedda20af3dfe',t:'MTc1ODE4ODkyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
